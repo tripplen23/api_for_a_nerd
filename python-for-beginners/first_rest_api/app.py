@@ -8,6 +8,7 @@ import models
 
 from resources.item import blp as ItemBlueprint
 from resources.store import blp as StoreBlueprint
+from resources.tag import blp as TagBlueprint
 
 # Factory pattern
 def create_app(db_url=None):
@@ -32,6 +33,7 @@ def create_app(db_url=None):
     # blp variable in the resources file
     api.register_blueprint(ItemBlueprint)
     api.register_blueprint(StoreBlueprint)
+    api.register_blueprint(TagBlueprint)
 
     return app
 

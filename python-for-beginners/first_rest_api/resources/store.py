@@ -23,18 +23,15 @@ class Store(MethodView):
     # GET specific store
     @blp.response(200, StoreSchema)
     def get(self, store_id):
-        try:
-            return stores[store_id]
-        except KeyError:
-            store_not_found()
-    
+        store = StoreModel.query.get_or_404(store_id)
+        return store
+        
     # DELETE specific store
     def delete(self, store_id):
-        try:
-            del stores[store_id]
-            return {"message": "Store deleted."}
-        except KeyError:
-            store_not_found()
+        store = StoreModel.query.get_or_404(store_id)
+        db.session.delete(store)
+        db.session.commit()
+        return {"message": "Store deleted successfully"}
 
 @blp.route("/store")
 class StoreList(MethodView):
@@ -42,7 +39,7 @@ class StoreList(MethodView):
     # GET store list
     @blp.response(200, StoreSchema(many=True))
     def get(self):
-        return stores.values()
+        return StoreModel.query.all()
     
     # POST store
     @blp.arguments(StoreSchema)
