@@ -12,10 +12,10 @@ from schemas import ItemSchema, ItemUpdateSchema
 def item_not_found():
     abort(404, message="Item not found.")
 
-blp = Blueprint("Items", __name__, description="Operations on items")
+blp = Blueprint("Items", __name__, description = "Operations on items")
 
 # TODO: GET, DELETE, PUT specific item dictionary
-@blp.route("/item/<string:item_id>")
+@blp.route("/item/<int:item_id>")
 class Item(MethodView):
 
     # GET item in specific store

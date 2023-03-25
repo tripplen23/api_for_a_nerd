@@ -14,10 +14,10 @@ def store_not_found():
     abort(404, message="Store not found.")
 
 # blueprint in flask-smorest is used to divide an API into multiple segments
-blp = Blueprint("Stores", __name__, description="Operations on stores")
+blp = Blueprint("Stores", __name__, description = "Operations on stores")
 
 # TODO: Connect the flask-smorest with the flask MethodView below
-@blp.route("/store/<string:store_id>")
+@blp.route("/store/<int:store_id>")
 class Store(MethodView):
 
     # GET specific store
@@ -57,4 +57,4 @@ class StoreList(MethodView):
         return store
 
 
-# **passing kw args to a constructor(unpack the data in the store_data dictionary and include them in new dictionary)
+# ** passing keyword args to a constructor(unpack the data in the store_data dictionary and include them in new dictionary)
